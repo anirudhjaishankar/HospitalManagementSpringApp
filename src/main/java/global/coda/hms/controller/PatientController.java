@@ -16,7 +16,7 @@ import global.coda.hms.service.PatientService;
 @RequestMapping("/patients")
 public class PatientController {
 
-	PatientService patientService;
+    PatientService patientService;
 
 	public PatientController(PatientService service) {
 		this.patientService = service;

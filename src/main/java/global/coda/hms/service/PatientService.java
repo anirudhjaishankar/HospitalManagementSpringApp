@@ -41,7 +41,7 @@ public class PatientService {
         int addressRowsAffected = addressMapper.updateAddress(address, addressId);
         return 0;
     }
-    
+
     public int deletePatient(int patientId) {
         return patientMapper.deletePatient(patientId);
     }
