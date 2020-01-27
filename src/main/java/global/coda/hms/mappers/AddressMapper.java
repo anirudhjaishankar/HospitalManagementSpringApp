@@ -1,13 +1,7 @@
-package global.coda.hms.Mapper;
-
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+package global.coda.hms.mappers;
 
 import global.coda.hms.beans.AddressBean;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface AddressMapper {
@@ -20,5 +14,5 @@ public interface AddressMapper {
     int insertAddress(AddressBean address);
 
     @Update("UPDATE t_address SET flatname=#{address.flatName} , flatnumber=#{address.flatNumber}, street=#{address.streetName}, area=#{address.areaName}, city=#{address.cityName}, state=#{address.stateName}, pincode=#{address.pincode} WHERE pk_address_id = #{addressId}")
-    int updateAddress(@Param("address") AddressBean address,@Param("addressId") int addressId);
+    int updateAddress(@Param("address") AddressBean address, @Param("addressId") int addressId);
 }

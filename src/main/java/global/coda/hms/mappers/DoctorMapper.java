@@ -1,25 +1,18 @@
-package global.coda.hms.Mapper;
-
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+package global.coda.hms.mappers;
 
 import global.coda.hms.beans.DoctorBean;
+import org.apache.ibatis.annotations.*;
 
 public interface DoctorMapper {
     @Select("SELECT phone, qualification, name, age, gender, username, password, flatname, flatnumber, street, area, city, state, pincode, fk_role_id FROM t_doctor d, t_address a, t_user u where d.fk_user_id = u.pk_user_id AND u.fk_address_id = a.pk_address_id AND d.is_deleted = false AND d.pk_doctor_id = #{id}")
-    @Results({ @Result(property = "role", column = "fk_role_id"),
+    @Results({@Result(property = "role", column = "fk_role_id"),
             @Result(property = "address.flatName", column = "flatname"),
             @Result(property = "address.flatNumber", column = "flatnumber"),
             @Result(property = "address.streetName", column = "street"),
             @Result(property = "address.areaName", column = "area"),
             @Result(property = "address.cityName", column = "city"),
             @Result(property = "address.stateName", column = "state"),
-            @Result(property = "address.pincode", column = "pincode") })
+            @Result(property = "address.pincode", column = "pincode")})
     DoctorBean getDoctorById(int id);
 
     @Select("SELECT fk_user_id from t_doctor where pk_Doctor_id  =#{DoctorId}")

@@ -1,23 +1,61 @@
 package global.coda.hms.beans;
 
-public class PatientBean extends UserBean {
-	private String phone;
-	private String bloodGroup;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
-	public String getPhone() {
-		return phone;
-	}
+import javax.persistence.*;
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+@Entity
+@Table(name="t_patient")
+@SQLDelete(sql="UPDATE t_patient SET is_deleted=true WHERE pk_patient_id = ?")
+@Where(clause = "is_deleted=0")
+public class PatientBean {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int pkPatientId;
 
-	public String getBloodGroup() {
-		return bloodGroup;
-	}
+    private String phone;
+    private String bloodGroup;
 
-	public void setBloodGroup(String bloodGroup) {
-		this.bloodGroup = bloodGroup;
-	}
+    @OneToOne
+    @JoinColumn(name="fk_user_id")
+    private UserBean userDetails;
+
+    @Column(name="is_deleted")
+    private boolean isDeleted;
+
+
+
+    public int getPkPatientId() {
+        return pkPatientId;
+    }
+
+    public void setPkPatientId(int pkPatientId) {
+        this.pkPatientId = pkPatientId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public UserBean getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserBean userDetails) {
+        this.userDetails = userDetails;
+    }
 
 }

@@ -1,78 +1,96 @@
 package global.coda.hms.beans;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="t_address")
 public class AddressBean {
 
-	private int id;
-	private String flatNumber;
-	private String flatName;
-	private String streetName;
-	private String areaName;
-	private String cityName;
-	private String stateName;
-	private Long pincode;
+    @Id
+    @Column(name="pk_address_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int pkAddressId;
 
-	public int getId() {
-		return id;
-	}
+    @Column(name="flatnumber")
+    private String flatNumber;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(name="flatname")
+    private String flatName;
 
-	public String getFlatNumber() {
-		return flatNumber;
-	}
+    @Column(name="street")
+    private String streetName;
 
-	public void setFlatNumber(String flatNumber) {
-		this.flatNumber = flatNumber;
-	}
+    @Column(name="area")
+    private String areaName;
 
-	public String getFlatName() {
-		return flatName;
-	}
+    @Column(name="city")
+    private String cityName;
 
-	public void setFlatName(String flatName) {
-		this.flatName = flatName;
-	}
+    @Column(name="state")
+    private String stateName;
+    private Long pincode;
 
-	public String getStreetName() {
-		return streetName;
-	}
+    public int getPkAddressId() {
+        return pkAddressId;
+    }
 
-	public void setStreetName(String streetName) {
-		this.streetName = streetName;
-	}
+    public void setPkAddressId(int pkAddressId) {
+        this.pkAddressId = pkAddressId;
+    }
+    public String getFlatNumber() {
+        return flatNumber;
+    }
 
-	public String getAreaName() {
-		return areaName;
-	}
+    public void setFlatNumber(String flatNumber) {
+        this.flatNumber = flatNumber;
+    }
 
-	public void setAreaName(String areaName) {
-		this.areaName = areaName;
-	}
+    public String getFlatName() {
+        return flatName;
+    }
 
-	public String getCityName() {
-		return cityName;
-	}
+    public void setFlatName(String flatName) {
+        this.flatName = flatName;
+    }
 
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
+    public String getStreetName() {
+        return streetName;
+    }
 
-	public String getStateName() {
-		return stateName;
-	}
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
 
-	public void setStateName(String stateName) {
-		this.stateName = stateName;
-	}
+    public String getAreaName() {
+        return areaName;
+    }
 
-	public Long getPincode() {
-		return pincode;
-	}
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 
-	public void setPincode(Long pincode) {
-		this.pincode = pincode;
-	}
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public Long getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(Long pincode) {
+        this.pincode = pincode;
+    }
 
 }
