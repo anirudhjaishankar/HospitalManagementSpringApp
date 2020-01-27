@@ -3,7 +3,7 @@ package global.coda.hms.beans;
 public class GenericResponse<T> {
     private int statusCode;
     private T data;
-    private int requestId;
+    private String requestId;
 
     public int getStatusCode() {
         return statusCode;
@@ -21,11 +21,11 @@ public class GenericResponse<T> {
         this.data = data;
     }
 
-    public int getRequestId() {
+    public String getRequestId() {
         return requestId;
     }
 
-    public void setRequestId(int requestId) {
+    public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
 }

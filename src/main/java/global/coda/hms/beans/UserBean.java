@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class UserBean {
     @Id
     @Column(name="pk_user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int pkUserId;
 
     @Column(name="fk_role_id")
@@ -20,7 +20,7 @@ public class UserBean {
     private String username;
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_address_id")
     private AddressBean address;
 

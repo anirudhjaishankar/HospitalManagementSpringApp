@@ -23,7 +23,7 @@ public class PatientController {
 
     @RequestMapping("/read/{id}")
     @ResponseBody
-    PatientBean getPatientById(@PathVariable("id") int id, @RequestAttribute("requestId") int requestId) {
+    PatientBean getPatientById(@PathVariable("id") int id, @RequestAttribute("requestId") String requestId) {
         LOGGER.traceEntry(Integer.toString(id));
         PatientBean patientResult = patientService.getPatientById(id);
         GenericResponse<PatientBean> response = new GenericResponse<PatientBean>();
@@ -37,7 +37,7 @@ public class PatientController {
     @PostMapping("/create")
     @ResponseBody
     int createPatient(@RequestBody PatientBean patient) {
-        LOGGER.traceEntry();
+        LOGGER.traceEntry(patient.toString());
         return patientService.insertPatient(patient);
     }
 

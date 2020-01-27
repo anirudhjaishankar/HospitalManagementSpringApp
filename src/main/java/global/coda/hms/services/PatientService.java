@@ -36,10 +36,14 @@ public class PatientService {
     }
 
     public int insertPatient(PatientBean newPatient) {
-        AddressBean address = newPatient.getUserDetails().getAddress();
-        int addressRowsAffected = addressMapper.insertAddress(address);
-        int userRowsAffected = userMapper.insertUser(newPatient.getUserDetails());
-        return patientMapper.insertPatient(newPatient);
+        PatientBean createdPatientBean = patientRepository.save(newPatient);
+        if(createdPatientBean != null){
+            return 1;
+        }
+        return 0;
+//        AddressBean address = newPatient.getUserDetails().getAddress();
+//        int addressRowsAffected = addressMapper.insertAddress(address);
+//        int userRowsAffected = userMapper.insertUser(newPatient.getUserDetails());
     }
 
     public int updatePatient(PatientBean newPatient, int patientId) {

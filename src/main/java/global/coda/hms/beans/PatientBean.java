@@ -11,13 +11,13 @@ import javax.persistence.*;
 @Where(clause = "is_deleted=0")
 public class PatientBean {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int pkPatientId;
 
     private String phone;
     private String bloodGroup;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_user_id")
     private UserBean userDetails;
 
