@@ -72,5 +72,12 @@ public class DoctorBean {
         this.patientList = patientList;
     }
 
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
 }
