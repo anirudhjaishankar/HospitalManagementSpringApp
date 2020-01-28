@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Where(clause = "is_deleted=0")
 public class PatientBean {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pkPatientId;
 
     private String phone;

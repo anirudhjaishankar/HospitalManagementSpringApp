@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class UserBean {
     @Id
     @Column(name="pk_user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pkUserId;
 
     @Column(name="fk_role_id")

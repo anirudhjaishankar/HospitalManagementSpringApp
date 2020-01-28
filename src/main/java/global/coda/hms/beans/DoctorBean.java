@@ -11,14 +11,14 @@ import java.util.List;
 public class DoctorBean {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pkDoctorId;
     private String phone;
 
     @Column(name = "qualification")
     private String speciality;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id")
     private UserBean userDetails;
 

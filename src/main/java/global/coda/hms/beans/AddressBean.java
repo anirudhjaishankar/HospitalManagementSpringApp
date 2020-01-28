@@ -8,7 +8,7 @@ public class AddressBean {
 
     @Id
     @Column(name="pk_address_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pkAddressId;
 
     @Column(name="flatnumber")

@@ -3,27 +3,24 @@ package global.coda.hms.controllers;
 import global.coda.hms.beans.GenericResponse;
 import global.coda.hms.beans.PatientBean;
 import global.coda.hms.services.PatientService;
-import global.coda.hms.utilities.LoggerInitializer;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import static global.coda.hms.constants.ControllerConstants.*;
 import static global.coda.hms.utilities.LoggerInitializer.initiateLogger;
-import static global.coda.hms.constants.PatientServiceConstants.PATIENT_SERVICE_CLASSNAME;
-import static global.coda.hms.constants.ControllerConstants.SUCCESS_STATUS_CODE;
 
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
 
+    @Autowired
     PatientService patientService;
-    public Logger LOGGER = initiateLogger(PATIENT_SERVICE_CLASSNAME);
-
-    public PatientController(PatientService service) {
-        this.patientService = service;
-    }
+    public Logger LOGGER = initiateLogger(PATIENT_CONTROLLER_CLASSNAME);
 
     @RequestMapping("/read/{id}")
     @ResponseBody
-    PatientBean getPatientById(@PathVariable("id") int id, @RequestAttribute("requestId") String requestId) {
+    GenericResponse<PatientBean> getPatientById(@PathVariable("id") int id, @RequestAttribute("requestId") String requestId) {
         LOGGER.traceEntry(Integer.toString(id));
         PatientBean patientResult = patientService.getPatientById(id);
         GenericResponse<PatientBean> response = new GenericResponse<PatientBean>();
@@ -31,26 +28,49 @@ public class PatientController {
         response.setStatusCode(SUCCESS_STATUS_CODE);
         response.setRequestId(requestId);
         LOGGER.traceExit(response.toString());
-        return patientResult;
+        return response;
     }
 
     @PostMapping("/create")
     @ResponseBody
-    int createPatient(@RequestBody PatientBean patient) {
+    GenericResponse<PatientBean> createPatient(@RequestBody PatientBean patient, @RequestAttribute("requestId") String requestId) {
         LOGGER.traceEntry(patient.toString());
-        return patientService.insertPatient(patient);
+        GenericResponse<PatientBean> response = new GenericResponse<PatientBean>();
+        PatientBean createdPatient = patientService.insertPatient(patient);
+        if(createdPatient != null){
+            response.setStatusCode(SUCCESS_STATUS_CODE);
+            response.setData(createdPatient);
+            response.setRequestId(requestId);
+        }
+        LOGGER.traceExit(response.toString());
+        return response;
     }
 
     @PutMapping("/update/{id}")
     @ResponseBody
-    int updatePatient(@RequestBody PatientBean newPatient, @PathVariable("id") int id) {
-        return patientService.updatePatient(newPatient, id);
+    GenericResponse<PatientBean> updatePatient(@RequestBody PatientBean updatedPatient, @PathVariable("id") int id, @RequestAttribute("requestId") String requestId) {
+        LOGGER.traceEntry(updatedPatient.toString());
+        GenericResponse<PatientBean> response = new GenericResponse<PatientBean>();
+        PatientBean patient = patientService.updatePatient(updatedPatient,id);
+        response.setStatusCode(SUCCESS_STATUS_CODE);
+        response.setRequestId(requestId);
+        response.setData(patient);
+        LOGGER.traceExit(response.toString());
+        return response;
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseBody
-    int deletePatient(@PathVariable("id") int id) {
-        return patientService.deletePatient(id);
+    GenericResponse<String> deletePatient(@PathVariable("id") int id, @RequestAttribute("requestId") String requestId) {
+        LOGGER.traceEntry(Integer.toString(id));
+        GenericResponse<String> response = new GenericResponse<String>();
+        response.setStatusCode(SUCCESS_STATUS_CODE);
+        response.setRequestId(requestId);
+        if(patientService.deletePatient(id)){
+            response.setData(DELETE_SUCCESS_MESSAGE);
+        }
+        LOGGER.traceExit(response.toString());
+        return response;
     }
 
 }
