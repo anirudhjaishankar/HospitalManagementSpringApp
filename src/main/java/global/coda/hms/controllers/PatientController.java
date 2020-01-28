@@ -7,11 +7,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static global.coda.hms.constants.ControllerConstants.*;
 import static global.coda.hms.utilities.LoggerInitializer.initiateLogger;
 
 @RestController
 @RequestMapping("/patients")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PatientController {
 
     @Autowired
@@ -27,6 +31,21 @@ public class PatientController {
         response.setData(patientResult);
         response.setStatusCode(SUCCESS_STATUS_CODE);
         response.setRequestId(requestId);
+        LOGGER.traceExit(response.toString());
+        return response;
+    }
+
+    @RequestMapping("/read/getAllPatients")
+    @ResponseBody
+    GenericResponse<List<PatientBean>> getAllPatients(@RequestAttribute("requestId") String requestId){
+        LOGGER.traceEntry();
+        List<PatientBean> patientList = new ArrayList<PatientBean>();
+        patientList = patientService.getAllPatients();
+        LOGGER.traceExit(patientList.size());
+        GenericResponse<List<PatientBean>> response= new GenericResponse<List<PatientBean>>();
+        response.setRequestId(requestId);
+        response.setStatusCode(SUCCESS_STATUS_CODE);
+        response.setData(patientList);
         LOGGER.traceExit(response.toString());
         return response;
     }

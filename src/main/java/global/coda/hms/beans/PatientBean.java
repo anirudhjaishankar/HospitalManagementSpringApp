@@ -58,4 +58,14 @@ public class PatientBean {
         this.userDetails = userDetails;
     }
 
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+
 }
