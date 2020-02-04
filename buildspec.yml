@@ -6,8 +6,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - gradle build
+      - gradle bootJar
 artifacts:
     type: zip
-    files: 
+    files:
       - 'build/libs/*.jar'
