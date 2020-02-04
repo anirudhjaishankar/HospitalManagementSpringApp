@@ -15,7 +15,7 @@ import static global.coda.hms.utilities.LoggerInitializer.initiateLogger;
 
 @RestController
 @RequestMapping("/patients")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://hmsangular.s3-website-us-east-1.amazonaws.com/")
 public class PatientController {
 
     @Autowired
