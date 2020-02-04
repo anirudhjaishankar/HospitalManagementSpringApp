@@ -1,13 +1,15 @@
-version: 0.1
+version: 0.2
 phases:
   install:
-    commands:
-      - echo Entering install phase... - echo Nothing to do now
+    runtime-versions:
+      java: corretto8
   build:
     commands:
       - echo Build started on `date`
-      - gradlew bootJar
+      - chmod +x gradlew
+      - ./gradlew bootJar
 artifacts:
-    type: zip
-    files:
-      - 'build/libs/*.jar'
+  files:
+    - build/libs/*.jar
+  #    - appspec.yml
+  discard-paths: yes
